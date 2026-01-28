@@ -12,9 +12,9 @@ function calculatePrelimGrade() {
     
     // Get inputs
     const attendance = parseInt(prompt("Enter number of attendances (0-5):"));
-    const lab1 = parseFloat(prompt("Enter Lab Work 1 grade (0-100):"));
-    const lab2 = parseFloat(prompt("Enter Lab Work 2 grade (0-100):"));
-    const lab3 = parseFloat(prompt("Enter Lab Work 3 grade (0-100):"));
+    const lab1 = parseInt(prompt("Enter Lab Work 1 grade (0-100):"));
+    const lab2 = parseInt(prompt("Enter Lab Work 2 grade (0-100):"));
+    const lab3 = parseInt(prompt("Enter Lab Work 3 grade (0-100):"));
 
     // Validate inputs
     if (isNaN(attendance) || isNaN(lab1) || isNaN(lab2) || isNaN(lab3)) {
@@ -29,6 +29,11 @@ function calculatePrelimGrade() {
 
     if (lab1 < 0 || lab1 > 100 || lab2 < 0 || lab2 > 100 || lab3 < 0 || lab3 > 100) {
         console.error("❌ Error: Lab grades must be between 0 and 100!");
+        return;
+    }
+
+    if (!Number.isInteger(lab1) || !Number.isInteger(lab2) || !Number.isInteger(lab3)) {
+        console.error("❌ Error: Lab grades must be whole numbers!");
         return;
     }
 

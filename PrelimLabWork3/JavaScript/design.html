@@ -264,18 +264,18 @@
             <div class="input-row">
                 <div class="input-group">
                     <label for="lab1">Lab Work 1 Grade (0-100):</label>
-                    <input type="number" id="lab1" min="0" max="100" step="0.01" placeholder="Enter grade">
+                    <input type="number" id="lab1" min="0" max="100" step="1" placeholder="Enter grade" oninput="preventDecimal(this)">
                 </div>
 
                 <div class="input-group">
                     <label for="lab2">Lab Work 2 Grade (0-100):</label>
-                    <input type="number" id="lab2" min="0" max="100" step="0.01" placeholder="Enter grade">
+                    <input type="number" id="lab2" min="0" max="100" step="1" placeholder="Enter grade" oninput="preventDecimal(this)">
                 </div>
             </div>
 
             <div class="input-group">
                 <label for="lab3">Lab Work 3 Grade (0-100):</label>
-                <input type="number" id="lab3" min="0" max="100" step="0.01" placeholder="Enter grade">
+                <input type="number" id="lab3" min="0" max="100" step="1" placeholder="Enter grade" oninput="preventDecimal(this)">
             </div>
         </div>
 
@@ -330,12 +330,20 @@
     </div>
 
     <script>
+        function preventDecimal(input) {
+            // Remove any decimal point from the input
+            if (input.value.includes('.')) {
+                input.value = Math.floor(input.value);
+                alert('Please enter whole numbers only!');
+            }
+        }
+
         function calculateGrades() {
             // Get input values
             const attendance = parseInt(document.getElementById('attendance').value);
-            const lab1 = parseFloat(document.getElementById('lab1').value);
-            const lab2 = parseFloat(document.getElementById('lab2').value);
-            const lab3 = parseFloat(document.getElementById('lab3').value);
+            const lab1 = parseInt(document.getElementById('lab1').value);
+            const lab2 = parseInt(document.getElementById('lab2').value);
+            const lab3 = parseInt(document.getElementById('lab3').value);
 
             // Validate inputs
             if (isNaN(attendance) || isNaN(lab1) || isNaN(lab2) || isNaN(lab3)) {

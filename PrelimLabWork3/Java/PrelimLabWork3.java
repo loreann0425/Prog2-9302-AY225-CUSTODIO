@@ -221,9 +221,9 @@ public class PrelimLabWork3 extends JFrame {
         try {
             // Get inputs
             int attendance = Integer.parseInt(attendanceField.getText().trim());
-            double lab1 = Double.parseDouble(lab1Field.getText().trim());
-            double lab2 = Double.parseDouble(lab2Field.getText().trim());
-            double lab3 = Double.parseDouble(lab3Field.getText().trim());
+            int lab1 = Integer.parseInt(lab1Field.getText().trim());
+            int lab2 = Integer.parseInt(lab2Field.getText().trim());
+            int lab3 = Integer.parseInt(lab3Field.getText().trim());
             
             // Validate inputs
             if (attendance < 0 || attendance > 5) {
