@@ -1,4 +1,4 @@
-package Java;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -13,9 +13,6 @@ public class PrelimLabWork3 extends JFrame {
     
     // Result labels
     private JLabel attendanceScoreLabel;
-    private JLabel lab1DisplayLabel;
-    private JLabel lab2DisplayLabel;
-    private JLabel lab3DisplayLabel;
     private JLabel labAvgLabel;
     private JLabel classStandingLabel;
     private JLabel passScoreLabel;
@@ -102,9 +99,6 @@ public class PrelimLabWork3 extends JFrame {
         ));
         
         attendanceScoreLabel = createResultLabel();
-        lab1DisplayLabel = createResultLabel();
-        lab2DisplayLabel = createResultLabel();
-        lab3DisplayLabel = createResultLabel();
         labAvgLabel = createResultLabel();
         classStandingLabel = createResultLabel();
         passScoreLabel = createResultLabel();

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Programmer: Lore Ann Custodio - 23-1068-533 -->
+    <title>Student Record System - Lore Ann Custodio (23-1068-533)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+            color: #dcdcdc;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #1a1a1a;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #009688 0%, #00796b 100%);
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header .subtitle {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 20px;
+            padding: 25px;
+        }
+
+        .input-panel {
+            background: #242424;
+            padding: 25px;
+            border-radius: 10px;
+            border: 1px solid #3a3a3a;
+        }
+
+        .input-panel h2 {
+            color: #009688;
+            margin-bottom: 20px;
+            font-size: 18px;
+            border-bottom: 2px solid #009688;
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #b0b0b0;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px 12px;
+            background: #1a1a1a;
+            border: 1px solid #3a3a3a;
+            border-radius: 6px;
+            color: #dcdcdc;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #009688;
+            background: #202020;
+            box-shadow: 0 0 0 3px rgba(0, 150, 136, 0.1);
+        }
+
+        .table-panel {
+            background: #242424;
+            padding: 25px;
+            border-radius: 10px;
+            border: 1px solid #3a3a3a;
+        }
+
+        .search-box {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 15px 12px 45px;
+            background: #1a1a1a;
+            border: 1px solid #3a3a3a;
+            border-radius: 8px;
+            color: #dcdcdc;
+            font-size: 14px;
+        }
+
+        .search-box::before {
+            content: "🔍";
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 8px;
+            border: 1px solid #3a3a3a;
+            max-height: 400px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #1a1a1a;
+        }
+
+        thead {
+            background: #2a2a2a;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #009688;
+            border-bottom: 2px solid #3a3a3a;
+            font-size: 13px;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #2a2a2a;
+            color: #dcdcdc;
+            font-size: 14px;
+        }
+
+        tbody tr {
+            transition: background 0.2s ease;
+            cursor: pointer;
+        }
+
+        tbody tr:hover {
+            background: #252525;
+        }
+
+        tbody tr.selected {
+            background: rgba(0, 150, 136, 0.3);
+            border-left: 3px solid #009688;
+        }
+
+        .button-panel {
+            padding: 20px 25px;
+            background: #1f1f1f;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            border-top: 1px solid #3a3a3a;
+        }
+
+        button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .btn-create {
+            background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+            color: white;
+        }
+
+        .btn-read {
+            background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+            color: white;
+        }
+
+        .btn-update {
+            background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+            color: white;
+        }
+
+        .btn-delete {
+            background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+            color: white;
+        }
+
+        .btn-clear {
+            background: linear-gradient(135deg, #9e9e9e 0%, #757575 100%);
+            color: white;
+        }
+
+        .stats {
+            text-align: center;
+            color: #888;
+            font-size: 13px;
+            margin-top: 15px;
+            padding: 10px;
+            background: #1a1a1a;
+            border-radius: 5px;
+        }
+
+        @media (max-width: 1024px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #3a3a3a;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4a4a4a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎓 STUDENT RECORD SYSTEM</h1>
+            <div class="subtitle">Prepared by: Lore Ann Custodio | Student ID: 23-1068-533</div>
+        </div>
+
+        <div class="content">
+            <div class="input-panel">
+                <h2>STUDENT INFORMATION</h2>
+                <div class="form-group">
+                    <label for="studentID">Student ID:</label>
+                    <input type="text" id="studentID" placeholder="Enter Student ID">
+                </div>
+                <div class="form-group">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" id="firstName" placeholder="Enter First Name">
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" id="lastName" placeholder="Enter Last Name">
+                </div>
+                <div class="form-group">
+                    <label for="labWork1">Lab Work 1:</label>
+                    <input type="number" id="labWork1" min="0" max="100" placeholder="0-100">
+                </div>
+                <div class="form-group">
+                    <label for="labWork2">Lab Work 2:</label>
+                    <input type="number" id="labWork2" min="0" max="100" placeholder="0-100">
+                </div>
+                <div class="form-group">
+                    <label for="labWork3">Lab Work 3:</label>
+                    <input type="number" id="labWork3" min="0" max="100" placeholder="0-100">
+                </div>
+                <div class="form-group">
+                    <label for="prelimExam">Prelim Exam:</label>
+                    <input type="number" id="prelimExam" min="0" max="100" placeholder="0-100">
+                </div>
+                <div class="form-group">
+                    <label for="attendance">Attendance Grade:</label>
+                    <input type="number" id="attendance" placeholder="Any numeric value">
+                </div>
+            </div>
+
+            <div class="table-panel">
+                <div class="search-box">
+                    <input type="text" id="searchBox" placeholder="Search by Student ID, First Name, or Last Name...">
+                </div>
+
+                <div class="table-wrapper">
+                    <table id="studentTable">
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Lab 1</th>
+                                <th>Lab 2</th>
+                                <th>Lab 3</th>
+                                <th>Prelim</th>
+                                <th>Attendance</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="stats" id="stats">Total Records: 0</div>
+            </div>
+        </div>
+
+        <div class="button-panel">
+            <button class="btn-create" onclick="createRecord()">➕ CREATE</button>
+            <button class="btn-read" onclick="readRecord()">📖 READ</button>
+            <button class="btn-update" onclick="updateRecord()">✏️ UPDATE</button>
+            <button class="btn-delete" onclick="deleteRecord()">🗑️ DELETE</button>
+            <button class="btn-clear" onclick="clearFields()">🔄 CLEAR</button>
+        </div>
+    </div>
+
+    <script src="StudentRecord.js"></script>
+</body>
+</html>
