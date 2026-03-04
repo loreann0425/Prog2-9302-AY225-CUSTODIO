@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mini Data Analytics Console Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="hero">
+      <h1>Mini Data Analytics Console Dashboard</h1>
+      <p class="subtitle">Select a CSV file and the dashboard will load it automatically.</p>
+    </header>
+
+    <main class="dashboard">
+      <section class="card upload-card">
+        <div class="card-header">
+          <h2>Upload CSV Dataset</h2>
+          <span id="statusBadge" class="badge badge-idle">No Dataset Loaded</span>
+        </div>
+
+        <input type="file" id="csvFile" hidden />
+
+        <label for="csvFile" class="upload-dropzone" id="uploadDropzone">
+          <div class="upload-icon">📂</div>
+          <div class="upload-text">
+            <strong>Click here to choose your CSV file</strong>
+            <span>Only .csv files are accepted. The selected file will automatically load.</span>
+          </div>
+        </label>
+
+        <div id="selectedFileBox" class="selected-file-box">
+          No file selected yet.
+        </div>
+
+        <p class="note">
+          If a non-CSV file is uploaded, the dashboard will show an error.
+        </p>
+
+        <div id="datasetInfo" class="dataset-info">
+          Waiting for CSV upload...
+        </div>
+
+        <div class="upload-actions">
+          <button id="resetBtn" class="btn btn-secondary">Reset</button>
+        </div>
+      </section>
+
+      <section class="card menu-card">
+        <div class="card-header">
+          <h2>Menu</h2>
+        </div>
+
+        <div class="menu-grid">
+          <button id="summaryBtn" class="btn menu-btn" disabled>1 - View Dataset Summary</button>
+          <button id="monthlyBtn" class="btn menu-btn" disabled>2 - Monthly Sales</button>
+          <button id="topBtn" class="btn menu-btn" disabled>3 - Top Customers</button>
+          <button id="categoryBtn" class="btn menu-btn" disabled>4 - Category Analysis</button>
+          <button id="exitBtn" class="btn btn-danger">5 - Exit</button>
+        </div>
+      </section>
+
+      <section class="card output-card">
+        <div class="card-header">
+          <h2>Output</h2>
+          <button id="clearOutputBtn" class="btn btn-secondary small-btn">Clear Output</button>
+        </div>
+
+        <div id="outputTitle" class="output-title">System Message</div>
+        <div id="output" class="output-box">
+          <div class="empty-state">
+            Program started. Please choose a CSV file first.
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
